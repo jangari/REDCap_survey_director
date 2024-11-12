@@ -1,0 +1,53 @@
+{
+    "name": "Survey Director",
+    "namespace": "INTERSECT\\SurveyDirector",
+    "description": "Directs participants through surveys as defined by logic",
+    "framework-version": 14,
+    "authors": [
+        {
+            "name": "Aidan Wilson",
+            "email": "aidan.wilson@intersect.org.au",
+            "institution": "Intersect Australia"
+        }
+    ],
+    "project-settings": [
+        {
+            "key": "instrument",
+            "name": "Instrument",
+            "type": "sub_settings",
+            "repeatable": true,
+            "sub_settings": [
+                {
+                    "key": "instrument_select",
+                    "name": "Select an instrument from which to direct respondents",
+                    "required": true,
+                    "type": "form-list"
+                },
+                {
+                    "key": "event_select",
+                    "name": "In which event<br/>(Leave blank to apply to all events)",
+                    "type": "event-list"
+                },
+                {
+                    "key": "condition",
+                    "name": "Condition",
+                    "type": "sub_settings",
+                    "repeatable": true,
+                    "sub_settings": [
+                        {
+                            "key": "logic",
+                            "name": "If the following conditions are met<br/>(leave blank to always redirect)",
+                            "type": "text"
+                        },
+                        {
+                            "key": "target",
+                            "name": "Redirect participant to<br/>(accepts piping)",
+                            "required": true,
+                            "type": "text"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
