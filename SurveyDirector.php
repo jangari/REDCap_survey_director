@@ -9,26 +9,44 @@ use Piping;
 class SurveyDirector extends \ExternalModules\AbstractExternalModule {
 
     function redcap_survey_complete($project_id, $record, $instrument, $event_id, $group_id, $survey_hash, $response_id, $repeat_instance)
-    /* function redcap_survey_page($project_id, $record, $instrument, $event_id, $group_id, $survey_hash, $response_id, $repeat_instance) // For debugging */
     {
-        $instruments = $this -> getProjectSetting('instrument');
+        // Quit if the module is disabled in the project settings
+        if ($this -> getProjectSetting('director_enabled') == 0) return;
 
-        for ($i = 0; $i < count($instruments); $i++){ // Loop over each new configuration
-            //Retrieve module configuration settings
-            $instrument_select = $this -> getProjectSetting('instrument_select')[$i];
-            // If we're not in this instrument, skip it
-            if ($instrument != $instrument_select) continue;
-            $event_select = $this -> getProjectSetting('event_select')[$i];
-            // If we're not in this event, skip it
-            if (!is_null($event_select) && $event_id != $event_select) continue;
-            $condition = $this -> getProjectSetting('condition')[$i];
-            // Parse each condition
-            for ($c = 0; $c < count($condition); $c++) {
-                $logic = $this -> getProjectSetting('logic')[$i][$c];
-                // If the logical condition is met, go to the target
-                if (is_null($logic) || REDCap::evaluateLogic($logic, $project_id, $record, $event_id, $repeat_instance))
+        // Parse each survey
+        $surveys = $this -> getProjectSetting('survey');
+        for ($s = 0; $s < count($surveys); $s++){
+
+            $survey_select = $this -> getProjectSetting('survey_select')[$s];
+            $event_select = $this -> getProjectSetting('event_select')[$s];
+            $directives = $this -> getProjectSetting('directive')[$s];
+
+            // Skip if the survey is disabled, if we're not in this instrument, or if we're not in this event
+            if ($this -> getProjectSetting('survey_enabled')[$s] == 0 || $instrument != $survey_select || (!is_null($event_select) && $event_id != $event_select)) continue;
+
+            // Parse each directive
+            for ($d = 0; $d < count($directives); $d++) {
+
+                // Skip if this directive is disabled
+                if ($this -> getProjectSetting('directive_enabled')[$s][$d] == 0) continue;
+
+                $condition = $this -> getProjectSetting('condition')[$s][$d];
+                $target = $this -> getProjectSetting('target')[$s][$d];
+
+                // If the condition is met...
+                if (is_null($condition) || REDCap::evaluateLogic
+                    (
+                        $condition,
+                        $project_id,
+                        $record,
+                        $event_id,
+                        $repeat_instance,
+                        null,
+                        $instrument // $current_context_instrument, allows instance smart variables to function normally
+                    )
+                )
+                // ...go to the target
                 {
-                    $target = $this -> getProjectSetting('target')[$i][$c];
                     $target = Piping::replaceVariablesInLabel(
                         $target, // $label='', 
                         $record, // $record=null, 
@@ -37,13 +55,16 @@ class SurveyDirector extends \ExternalModules\AbstractExternalModule {
                         array(), // $record_data=array(),
                         false, // $replaceWithUnderlineIfMissing=true, 
                         $project_id, // $project_id=null, 
-                        false // $wrapValueInSpan=true
+                        false, // $wrapValueInSpan=true
+                        '', // $repeat_instrument=''
+                        1, // $recursiveCount=1
+                        false, // $simulation=false
+                        false, //$applyDeIdExportRights=false
+                        $instrument // Ensures we get the right instrument context for piping smart variables
                     );
                     header('Location: '.$target);
                     $this->exitAfterHook();
-                    // Echo out target and logic to javascript console for troubleshooting
-                    echo "<script type=\"text/javascript\">console.log(".$target.");console.log(".$logic.");";
-                    // Need to exit here, the first time a condition is evaluated as true. Else it will be the last condition that triggers the redirect.
+                    // If we don't return from the function here, then all other directives will be evaluated, and the last one to be true will take effect.
                     return;
                 }
             }

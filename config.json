@@ -1,7 +1,7 @@
 {
     "name": "Survey Director",
     "namespace": "INTERSECT\\SurveyDirector",
-    "description": "Directs participants through surveys as defined by logic",
+    "description": "Directs participants through surveys as controlled by logic. Easily develop a 'flow' between your surveys and then to any external URL by configuring multiple alternative targets upon completion of any survey.",
     "framework-version": 14,
     "authors": [
         {
@@ -12,36 +12,52 @@
     ],
     "project-settings": [
         {
-            "key": "instrument",
-            "name": "Instrument",
+            "key": "director_enabled",
+            "name": "Enabled?",
+            "type": "checkbox"
+        },
+        {
+            "key": "survey",
+            "name": "Survey",
             "type": "sub_settings",
             "repeatable": true,
             "sub_settings": [
                 {
-                    "key": "instrument_select",
-                    "name": "Select an instrument from which to direct respondents",
+                    "key": "survey_enabled",
+                    "name": "Enabled?",
+                    "type": "checkbox"
+                },
+                {
+                    "key": "survey_select",
+                    "name": "Upon completion of",
                     "required": true,
-                    "type": "form-list"
+                    "type": "form-list",
+                    "visibility-filter": "public"
                 },
                 {
                     "key": "event_select",
-                    "name": "In which event<br/>(Leave blank to apply to all events)",
+                    "name": "In this event<br/>(Leave blank to apply to all events)",
                     "type": "event-list"
                 },
                 {
-                    "key": "condition",
-                    "name": "Condition",
+                    "key": "directive",
+                    "name": "Directive",
                     "type": "sub_settings",
                     "repeatable": true,
                     "sub_settings": [
                         {
-                            "key": "logic",
-                            "name": "If the following conditions are met<br/>(leave blank to always redirect)",
+                            "key": "directive_enabled",
+                            "name": "Enabled?",
+                            "type": "checkbox"
+                        },
+                        {
+                            "key": "condition",
+                            "name": "If this logic is true<br/>(leave blank to always redirect)",
                             "type": "text"
                         },
                         {
                             "key": "target",
-                            "name": "Redirect participant to<br/>(accepts piping)",
+                            "name": "Direct participant to this URL<br/>(accepts piping)",
                             "required": true,
                             "type": "text"
                         }
