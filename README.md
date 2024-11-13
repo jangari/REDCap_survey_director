@@ -1,5 +1,7 @@
 # REDCap Survey Director
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.14136906.svg)](https://doi.org/10.5281/zenodo.14136906)
+
 This module allows project designers to direct participants through surveys controlled by logic. Easily develop a 'flow' between your surveys and then to any external URL by configuring multiple alternative targets upon completion of any survey.
 
 ## Installation
@@ -40,7 +42,7 @@ It would be good to be able to select from the list of public surveys the target
 
 If you use this external module for a project that generates a research output, please cite this software in addition to [citing REDCap](https://projectredcap.org/resources/citations/) itself. You can do so using the APA referencing style as below:
 
-> Wilson, A. (2024). REDCap Survey Director [Computer software]. https://github.com/jangari/REDCap_Survey_Director
+> Wilson, A. (2024). REDCap Survey Director [Computer software]. https://github.com/jangari/REDCap_Survey_Director https://doi.org/10.5281/zenodo.14136906
 
 Or by adding this reference to your BibTeX database:
 
@@ -51,6 +53,7 @@ title = {{REDCap Survey Director}},
 url = {https://github.com/jangari/REDCap_Survey_Director},
 year = {2024},
 month = {11},
+doi = {10.5281/zenodo.14136906}
 }
 ```
 
