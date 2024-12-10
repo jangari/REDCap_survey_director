@@ -40,7 +40,7 @@ class SurveyDirector extends \ExternalModules\AbstractExternalModule {
             if ($this -> getProjectSetting('survey_enabled')[$s] == 0) {
                 if ($debug) {
                     $logMsg = array();
-                    (($longitudinal)) ? $logMsg[] = "Survey: $instrument ($event_name)" : $logMsg[] = "Survey: $instrument";
+                    $longitudinal ? $logMsg[] = "Survey: $instrument ($event_name)" : $logMsg[] = "Survey: $instrument";
                     if ($repeating) $logMsg[] = "Instance: $repeat_instance";
                     $logMsg[] = "All directives disabled";
                     REDCap::logEvent(
@@ -63,7 +63,7 @@ class SurveyDirector extends \ExternalModules\AbstractExternalModule {
                 if ($this -> getProjectSetting('directive_enabled')[$s][$d] == 0) {
                     if ($debug) {
                         $logMsg = array();
-                        (($longitudinal)) ? $logMsg[] = "Survey: $instrument ($event_name)" : $logMsg[] = "Survey: $instrument";
+                        $longitudinal ? $logMsg[] = "Survey: $instrument ($event_name)" : $logMsg[] = "Survey: $instrument";
                         if ($repeating) $logMsg[] = "Instance: $repeat_instance";
                         $logMsg[] = "Directive $directive_index disabled";
                         REDCap::logEvent(
@@ -111,7 +111,7 @@ class SurveyDirector extends \ExternalModules\AbstractExternalModule {
                     );
                     if ($debug) {
                         $logMsg = array();
-                        (($longitudinal)) ? $logMsg[] = "Survey: $instrument ($event_name)" : $logMsg[] = "Survey: $instrument";
+                        $longitudinal ? $logMsg[] = "Survey: $instrument ($event_name)" : $logMsg[] = "Survey: $instrument";
                         if ($repeating) $logMsg[] = "Instance: $repeat_instance"; 
                         $logMsg[] = "Directive $directive_index";
                         if (!is_null($condition)) $logMsg[] = "Condition: $condition (true)";
@@ -130,7 +130,7 @@ class SurveyDirector extends \ExternalModules\AbstractExternalModule {
                     return;
                 } elseif ($debug) {
                     $logMsg = array();
-                    (($longitudinal)) ? $logMsg[] = "Survey: $instrument ($event_name)" : $logMsg[] = "Survey: $instrument";
+                    $longitudinal ? $logMsg[] = "Survey: $instrument ($event_name)" : $logMsg[] = "Survey: $instrument";
                     if ($repeating) $logMsg[] = "Instance: $repeat_instance"; 
                     $logMsg[] = "Directive $directive_index";
                     $logMsg[] = "Condition: $condition (false)";
