@@ -17,6 +17,11 @@
             "type": "checkbox"
         },
         {
+            "key": "debug",
+            "name": "Enable debug mode?</br><em>Director events will be output to the project log. Not recommended in production mode</em>",
+            "type": "checkbox"
+        },
+        {
             "key": "survey",
             "name": "Survey",
             "type": "sub_settings",

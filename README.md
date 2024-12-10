@@ -32,6 +32,12 @@ The target option supports piping, with both regular variables, event-specific v
 https://panelprovider.com/survey/<yourID>?complete=true&duration=[survey-duration]&follow-up=[event_2_arm_1][survey-url:welcome]
 ```
 
+### Debugging
+
+Due to the nature of the `redcap_survey_complete` hook, debugging using the traditional method of outputting information to the JavaScript console is not possible. Instead, debug mode will send information to the REDCap project log. For this reason, it is recommended that you do not enable debug mode in Production projects, so that the project log does not contain this information.
+
+Debugging events will display the survey, event (if longitudinal), instance (if repeating), directive ID, condition and whether it was evaluated as true or false, and fully constructed target URL. If a survey or a directive is not enabled, the debug log will also include that information.
+
 ## Todo
 
 It would be nice to have a graphical interface in which this module's settings can be more intuitively configured, since the standard External Module Framework's module configuration dialogue can be confusing with multiple levels of sub-settings.
