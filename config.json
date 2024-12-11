@@ -1,7 +1,9 @@
 {
     "name": "Survey Director",
+    "tt_name": "name",
     "namespace": "INTERSECT\\SurveyDirector",
     "description": "Directs participants through surveys as controlled by logic. Easily develop a 'flow' between your surveys and then to any external URL by configuring multiple alternative targets upon completion of any survey.",
+    "tt_description": "description",
     "framework-version": 14,
     "authors": [
         {
@@ -13,27 +15,32 @@
     "project-settings": [
         {
             "key": "director_enabled",
+            "tt_name": "director_enabled",
             "name": "Enabled?",
             "type": "checkbox"
         },
         {
             "key": "debug",
+            "tt_name": "debug",
             "name": "Enable debug mode?</br><em>Director events will be output to the project log. Not recommended in production mode</em>",
             "type": "checkbox"
         },
         {
             "key": "survey",
+            "tt_name": "survey",
             "name": "Survey",
             "type": "sub_settings",
             "repeatable": true,
             "sub_settings": [
                 {
                     "key": "survey_enabled",
+                    "tt_name": "survey_enabled",
                     "name": "Enabled?",
                     "type": "checkbox"
                 },
                 {
                     "key": "survey_select",
+                    "tt_name": "survey_select",
                     "name": "Upon completion of",
                     "required": true,
                     "type": "form-list",
@@ -41,27 +48,32 @@
                 },
                 {
                     "key": "event_select",
+                    "tt_name": "event_select",
                     "name": "In this event<br/>(Leave blank to apply to all events)",
                     "type": "event-list"
                 },
                 {
                     "key": "directive",
+                    "tt_name": "directive",
                     "name": "Directive",
                     "type": "sub_settings",
                     "repeatable": true,
                     "sub_settings": [
                         {
                             "key": "directive_enabled",
+                            "tt_name": "directive_enabled",
                             "name": "Enabled?",
                             "type": "checkbox"
                         },
                         {
                             "key": "condition",
+                            "tt_name": "condition",
                             "name": "If this logic is true<br/>(leave blank to always redirect)",
                             "type": "text"
                         },
                         {
                             "key": "target",
+                            "tt_name": "target",
                             "name": "Direct participant to this URL<br/>(accepts piping)",
                             "required": true,
                             "type": "text"

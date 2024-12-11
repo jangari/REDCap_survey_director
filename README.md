@@ -20,16 +20,20 @@ This module is configured on the External Module settings dialogue. There you wi
 
 This allows for effective control of survey flow with more precision than the Survey Queue, and the ability to configure multiple targets, compared with REDCap's built-in Survey Auto-Continuation.
 
-As the number of targets that can be configured is unlimited, each controlled by REDCap's familiar conditional logic, the possibilities are endless. Here are some examples:
+As the number of targets that can be configured is unlimited, each controlled by REDCap's familiar conditional logic, the possibilities are endless.
+
+### Examples 
 
 - Direct a respondent to a `[new-instance]` of a repeating survey while the number of instances is less than a desired number
 - Direct respondents to different external URLs depending on their responses, or other factors such as a random number
-- Enable a supplementary survey based on inclusion criteria
+- Enable a supplementary survey based on inclusion criteria, such as a substudy
+- Directing respondents out to one of multiple different URL endpoints for different contexts, e.g., `nonconsent` versus `ineligible`
+- Use REDCap to write a Choose Your Own Adventure story!
 
-The target option supports piping, with both regular variables, event-specific variables, and smart variables. This means that literal URLs may be built using variables, for example to direct panel participants back to their panel provider to specific endpoints with specific values included as directed by that panel provider.
+The Target supports piping, with both regular variables, event-specific variables, and smart variables. This means that literal URLs may be built using variables, for example to direct panel participants back to their panel provider to specific endpoints with specific values included as directed by that panel provider.
 
 ```
-https://panelprovider.com/survey/<yourID>?complete=true&duration=[survey-duration]&follow-up=[event_2_arm_1][survey-url:welcome]
+https://panelprovider.com/survey/?complete=true&participant_id=[participant-id]&duration=[survey-duration]&follow-up=[event_2_arm_1][survey-url:welcome]
 ```
 
 ### Debugging
